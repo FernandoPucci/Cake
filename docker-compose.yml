@@ -1,0 +1,63 @@
+version: '3.4'
+
+services:
+
+###############################################
+#   MAIN APP                                  #
+###############################################
+  cake_test_app:
+    container_name: cake_test_app
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    env_file:
+      - compose-environments-all.env
+    ports:
+      - 80:80
+    links: 
+      - db:db
+    depends_on:
+      - db
+    volumes:
+      - ./www:/var/www/html/
+    networks:
+      - cake_network
+
+###############################################
+#   DATABASE                                  #
+###############################################
+  db:
+    image: mysql:5.6
+    ports: 
+        - "3306:3306"
+    env_file:
+        - compose-environments-all.env
+    volumes:
+        - persistent:/var/lib/mysql
+    networks:
+        - cake_network
+
+###############################################
+#   PHP MY ADMIN                              #
+###############################################
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links: 
+        - db:db
+    ports:
+        - 8000:80    
+    env_file:
+        - compose-environments-all.env
+    networks:
+        - cake_network
+    depends_on:
+        - db
+
+volumes:
+    persistent:
+
+networks:
+    cake_network:
+      ipam:         
+        driver: bridge    
