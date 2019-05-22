@@ -14,7 +14,13 @@ chmod +x /usr/local/bin/composer`
 ### Create Sample Application
 `composer create-project --prefer-dist cakephp/app MyApp`
 
+### Install Bake Console
+`composer require --dev cakephp/bake:~1.0`
+
+
 ## Another Infos
 _https://www.youtube.com/watch?v=0_I_2SF5Bfs_
 
-https://www.youtube.com/watch?v=wMOSIPVfWF4
+_https://www.youtube.com/watch?v=wMOSIPVfWF4_
+
+_https://book.cakephp.org/bake/1.x/en/index.html_ 
