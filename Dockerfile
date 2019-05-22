@@ -14,6 +14,12 @@ COPY ./apacheConfigs/php.ini /usr/local/etc/php/php.ini
 # RUN docker-php-ext-install mysqli
 RUN docker-php-ext-install mysql
 
+# INSTALL INTL
+RUN apt-get -y update \
+&& apt-get install -y libicu-dev\
+&& docker-php-ext-configure intl \
+&& docker-php-ext-install intl
+
 RUN  a2enmod rewrite &&  service apache2 restart
 
 # CREATE NETWORK
