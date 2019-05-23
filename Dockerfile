@@ -11,8 +11,8 @@ COPY ./apacheConfigs/docker-php.conf /etc/apache2/conf-enabled/docker-php.conf
 # PHP CONFIGURATIONS
 COPY ./apacheConfigs/php.ini /usr/local/etc/php/php.ini
 
-# RUN docker-php-ext-install mysqli
-RUN docker-php-ext-install mysql
+# RUN docker-php-ext-install mysql
+RUN docker-php-ext-install  mbstring mysqli pdo pdo_mysql
 
 # INSTALL INTL
 RUN apt-get -y update \
